@@ -6,13 +6,22 @@ from utils.utils import instantiate_from_config
 from huggingface_hub import hf_hub_download
 
 class Text2Video():
-    def __init__(self,result_dir='./tmp/',gpu_num=1) -> None:
+    def __init__(self,result_dir='./tmp/',gpu_num=1,hd=false) -> None:
         self.download_model()
         self.result_dir = result_dir
         if not os.path.exists(self.result_dir):
             os.mkdir(self.result_dir)
-        ckpt_path='/home/models/VideoCrafter/checkpoints/base_512_v1/model.ckpt'
-        config_file='VideoCrafter/configs/inference_t2v_512_v1.0.yaml'
+        if(hd):
+            ckpt_path='/home/models/VideoCrafter/checkpoints/base_1024_v1/model.ckpt'
+            config_file='VideoCrafter/configs/inference_t2v_1024_v1.0.yaml'
+            self.h = 576 // 8
+            self.w = 1024 // 8
+        else:
+            ckpt_path='/home/models/VideoCrafter/checkpoints/base_512_v1/model.ckpt'
+            config_file='VideoCrafter/configs/inference_t2v_512_v1.0.yaml'
+            self.h = 320 // 8
+            self.w = 512 // 8
+        
         config = OmegaConf.load(config_file)
         model_config = config.pop("model", OmegaConf.create())
         model_config['params']['unet_config']['params']['use_checkpoint']=False   
@@ -36,7 +45,9 @@ class Text2Video():
         batch_size=1
         channels = model.model.diffusion_model.in_channels
         frames = model.temporal_length
-        h, w = 320 // 8, 512 // 8
+        #h, w = 320 // 8, 512 // 8
+        h=self.h
+        w=self.w
         noise_shape = [batch_size, channels, frames, h, w]
 
         #prompts = batch_size * [""]
@@ -64,6 +75,15 @@ class Text2Video():
 
             if not os.path.exists(local_file):
                 hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='/home/models/VideoCrafter/checkpoints/base_512_v1/', local_dir_use_symlinks=False)
+        REPO_ID = 'VideoCrafter/Text2Video-1024-v1.0'
+        filename_list = ['model.ckpt']
+        if not os.path.exists('/home/models/VideoCrafter/checkpoints/base_1024_v1/'):
+            os.makedirs('/home/models/VideoCrafter/checkpoints/base_1024_v1/')
+        for filename in filename_list:
+            local_file = os.path.join('/home/models/VideoCrafter/checkpoints/base_1024_v1/', filename)
+
+            if not os.path.exists(local_file):
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='/home/models/VideoCrafter/checkpoints/base_1024_v1/', local_dir_use_symlinks=False)
 
     
 if __name__ == '__main__':
