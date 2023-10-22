@@ -6,7 +6,7 @@ from utils.utils import instantiate_from_config
 from huggingface_hub import hf_hub_download
 
 class Text2Video():
-    def __init__(self,result_dir='./tmp/',gpu_num=1,hd=false) -> None:
+    def __init__(self,result_dir='./tmp/',gpu_num=1,hd=False) -> None:
         self.download_model()
         self.result_dir = result_dir
         if not os.path.exists(self.result_dir):
