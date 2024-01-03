@@ -1,9 +1,11 @@
 
 ## ___***VideoCrafter1: Open Diffusion Models for High-Quality Video Generation***___
 
-<a href='https://arxiv.org/abs/TODO'><img src='https://img.shields.io/badge/Technique Report-TODO-red'></a> 
+<a href='https://ailab-cvc.github.io/videocrafter/'><img src='https://img.shields.io/badge/Project-Page-green'></a> 
+<a href='https://arxiv.org/abs/2310.19512'><img src='https://img.shields.io/badge/Technique-Report-red'></a> 
 [![Discord](https://dcbadge.vercel.app/api/server/rrayYqZ4tf?style=flat)](https://discord.gg/rrayYqZ4tf)
 <a href='https://huggingface.co/spaces/VideoCrafter/VideoCrafter'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
+[![Replicate](https://replicate.com/cjwbw/videocrafter/badge)](https://replicate.com/cjwbw/videocrafter)
 [![GitHub](https://img.shields.io/github/stars/VideoCrafter/VideoCrafter?style=social)](https://github.com/VideoCrafter/VideoCrafter)
 
 
@@ -63,6 +65,8 @@ Click the GIF to access the high-resolution video.
 ---
 
 ## 📝 Changelog
+- __[2023.10.30]__: Release [VideoCrafter1](https://arxiv.org/abs/2310.19512) Technical Report!
+
 - __[2023.10.19]__: Release the 320x512 Text2Video Model, and HuggingFace demo.
 
 - __[2023.10.13]__: 🔥🔥 Release the VideoCrafter1, High Quality Video Generation!
@@ -79,9 +83,9 @@ Click the GIF to access the high-resolution video.
 
 |Models|Resolution|Checkpoints|
 |:---------|:---------|:--------|
-|Text2Video|576x1024|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-1024-v1.0/blob/main/model.ckpt)
-|Text2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-512-v1/blob/main/model.ckpt)
-|Image2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Image2Video-512-v1.0/blob/main/model.ckpt)
+|Text2Video|576x1024|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-1024/blob/main/model.ckpt)
+|Text2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Text2Video-512/blob/main/model.ckpt)
+|Image2Video|320x512|[Hugging Face](https://huggingface.co/VideoCrafter/Image2Video-512/blob/main/model.ckpt)
 
 
 
@@ -112,14 +116,31 @@ pip install -r requirements.txt
   sh scripts/run_image2video.sh
 ```
 
+### 3. Local Gradio demo
+
+1. Download the pretrained T2V and I2V models and put them in the corresponding directory according to the previous guidelines.
+2. Input the following commands in terminal.
+```bash
+  python gradio_app.py
+```
+
 ---
 ## 📋 Techinical Report
-⏳⏳⏳ Comming soon. We are still working on it.💪
+😉 Tech report: [VideoCrafter1: Open Diffusion Models for High-Quality Video Generation](https://arxiv.org/abs/2310.19512)
 <br>
 
 ## 😉 Citation
 The technical report is currently unavailable as it is still in preparation. You can cite the paper of our image-to-video model and related base model.
 ```
+@misc{chen2023videocrafter1,
+      title={VideoCrafter1: Open Diffusion Models for High-Quality Video Generation}, 
+      author={Haoxin Chen and Menghan Xia and Yingqing He and Yong Zhang and Xiaodong Cun and Shaoshu Yang and Jinbo Xing and Yaofang Liu and Qifeng Chen and Xintao Wang and Chao Weng and Ying Shan},
+      year={2023},
+      eprint={2310.19512},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
 @article{xing2023dynamicrafter,
       title={DynamiCrafter: Animating Open-domain Images with Video Diffusion Priors}, 
       author={Jinbo Xing and Menghan Xia and Yong Zhang and Haoxin Chen and Xintao Wang and Tien-Tsin Wong and Ying Shan},
